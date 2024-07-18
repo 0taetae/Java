@@ -35,7 +35,7 @@ public class MovieTest {
 		}*/
 		System.out.println("***평균 상영 시간***");
 		System.out.println(ob.getRunningTimeAvg());
-
+		System.out.println("아이고");
 	}
 
 }

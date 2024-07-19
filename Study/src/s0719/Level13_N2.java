@@ -1,7 +1,7 @@
 package s0719;
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.util.Scanner;
 public class Level13_N2 {
 
 	public static void main(String[] args) {

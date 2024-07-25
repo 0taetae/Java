@@ -1,45 +1,41 @@
 package s0725;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.lang.Math;
+import java.util.*;
+import java.io.*;
 
 public class AbsHeap {
-	static int N;
-	static int[] arr;
-	static int pmin = (int) Math.pow(2, 31);
-	static int mmin = (int) -Math.pow(2, 31);
+
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());
-		arr = new int[N];
+		int N = Integer.parseInt(br.readLine());
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer a, Integer b) {
+				int absA = Math.abs(a);
+				int absB = Math.abs(b);
+				
+				if(absA > absB) {
+					return absA - absB;
+				}else if(absA == absB) {
+					return a - b;
+				}else {
+					return absA - absB;
+				}
+			}
+		});
 		for(int i=0;i<N;i++) {
 			int X = Integer.parseInt(br.readLine());
 			if(X!=0) {
-				
+				pq.offer(X);
 			}
 			else {
-				Arrays.stream(arr).filter(item -> item!=(ABS(arr))).toArray(int[]::new);
-			}  // 절댓값의 최솟값 -> 양수중에서는 작은수, 음수중에서는 큰수
-		}
-
-	}
-	static int ABS(int[] arr) {
-		for(int i=0;i<N;i++) {
-			if(arr[i]>0) {
-				if(arr[i]<pmin) {
-					pmin = arr[i];
-				}
-			}
-			if(arr[i]<0) {
-				if(arr[i]>mmin) {
-					mmin = arr[i];
-				}
+				if(pq.isEmpty()) System.out.println(0);
+				else System.out.println(pq.poll());
 			}
 		}
-		return Math.min(pmin, Math.abs(mmin));
+		
+		
 	}
 
 }
+	

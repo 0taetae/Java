@@ -1,7 +1,7 @@
 package p0718;
 
 import p0717.Person;
-import p0717_spider.SpiderMan;
+import p0717.spider.SpiderMan;
 
 public class PolymorphismUsage {
     public void useObjectArray() {

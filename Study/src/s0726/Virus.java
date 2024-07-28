@@ -1,6 +1,6 @@
 package s0726;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -15,10 +15,10 @@ public class Virus {
 
 		boolean visited[] = new boolean[N + 1]; // 바이러스 여부 = 방문 여부
 
-		LinkedList<Integer>[] list = new LinkedList[N + 1];  // 컴퓨터 리스트
-
-		for (int i = 0; i <= N; i++) {
-			list[i] = new LinkedList<Integer>();
+		ArrayList<Integer>[] list = new ArrayList[N + 1];  // 컴퓨터 리스트
+		
+		for (int i = 1; i <= N; i++) {
+			list[i] = new ArrayList<Integer>();
 		}
 
 		for (int i = 0; i < K; i++) {  // 리스트의 index = 컴퓨터 번호
@@ -27,39 +27,29 @@ public class Virus {
 			list[v1].add(v2);
 			list[v2].add(v1);
 		}
-
-		BFS(1, list, visited);
 		
-		for(int i=0;i<=N;i++) {  // 바이러스 감염 컴퓨터 개수
-			if(visited[i]) {
-				count++;
-			}
-		}
+
+		BFS(1, list, visited);  // 1번 컴퓨터부터 시작 
+		
 		System.out.println(count-1);  // 1번 컴퓨터를 제외
 	}
 
-	public static void BFS(int start, LinkedList<Integer>[] list, boolean[] visited) {
+	public static void BFS(int start, ArrayList<Integer>[] list, boolean[] visited) {
 		Queue<Integer> q = new LinkedList<Integer>();
-		visited[start] = true; 
 		q.add(start);
 
-		while(q.size() != 0) { 
+		while(q.size() != 0) {  // 큐가 빌때까지 반복
 			start = q.poll(); 
-			//System.out.print(v + " ");
-			//count++;
-
-			Iterator<Integer> iter = list[start].listIterator();
-			while(iter.hasNext()) { 
-				int w = iter.next(); 
-				if(!visited[w]) { 
-					visited[w] = true; 
-					q.add(w); 
-				} 
+			if(!visited[start]) {
+				count++;
+				visited[start] = true; 
+				for(int i=0;i<list[start].size();i++) {
+					q.add(list[start].get(i));
+				}
 			}
+			
 		}
-		//return count;
 	}
-		
 		
 	
 }

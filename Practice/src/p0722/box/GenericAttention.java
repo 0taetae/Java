@@ -7,6 +7,7 @@ public class GenericAttention<I> {
 
     public void useRawType() {
         // TODO: 다음에서 발생하는 warning을 제거해보자.
+    	@SuppressWarnings("rawtypes")
         GenericBox box = new GenericBox();
 
         // END
@@ -17,10 +18,12 @@ public class GenericAttention<I> {
         GenericBox<Person> pbox = new GenericBox<>();
         // TODO: pbox에 담을 수 있는 객체를 담아보자.
         pbox.setSome(new Person("피터파커"));
+        pbox.setSome(new SpiderMan());
         // END
 
         // TODO: pbox를 다른 객체로 대체해보자.
-        GenericBox<SpiderMan> sbox = new GenericBox<>();
+        //pbox = new GenericBox<SpiderMan>{}; // 타입이 다르므로 안된다.
+        GenericBox<SpiderMan> sbox = new GenericBox<>();  // pbox != sbox
         // END
     }
 
@@ -31,7 +34,7 @@ public class GenericAttention<I> {
         GenericBox<SpiderMan> obj = new GenericBox<>();
 
         // compile error : Type Object cannot be safely cast to GenericBox<String>
-        //if(obj instanceof GenericBox<String>) {  }
+        //if(obj instanceof GenericBox<String>) {  }  // 안됨
 
         if (obj instanceof GenericBox gb) {
         	GenericBox<SpiderMan> casted = (GenericBox<SpiderMan>)gb; // raw type으로 받았으므로 타입이 확실하지 않음
@@ -54,7 +57,7 @@ public class GenericAttention<I> {
         boxes3[0] = new GenericBox<Person>();
         // TODO: 위코드가 의미 있게 된다면 어떤 불상사가 발생하는지 생각해보자.
         GenericBox<String> strbox = new GenericBox<String>("hello");
-        boxes3[1] = (GenericBox)strbox;  // 이렇게 쓰면 안된다.
+        boxes3[1] = (GenericBox)strbox;  // 형변환 -> 타입의 안정성 확보 X -> 이렇게 쓰면 안된다.
         // END
     }
 

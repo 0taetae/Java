@@ -1,5 +1,6 @@
 package s0726;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -17,6 +18,8 @@ public class Virus {
 
 		ArrayList<Integer>[] list = new ArrayList[N + 1];  // 컴퓨터 리스트
 		
+		long beforTime = System.currentTimeMillis();
+		
 		for (int i = 1; i <= N; i++) {
 			list[i] = new ArrayList<Integer>();
 		}
@@ -31,6 +34,9 @@ public class Virus {
 
 		BFS(1, list, visited);  // 1번 컴퓨터부터 시작 
 		
+		long afterTime = System.currentTimeMillis();
+		long setDiffTime = (afterTime - beforTime);
+		System.out.println("time"+setDiffTime);
 		System.out.println(count-1);  // 1번 컴퓨터를 제외
 	}
 
